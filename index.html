@@ -36,7 +36,7 @@
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background:var(--bg);
+    background:radial-gradient(circle at 4% 11%,rgba(45,210,233,.25),transparent 22rem),radial-gradient(circle at 95% 7%,rgba(255,23,104,.18),transparent 24rem),radial-gradient(circle at 77% 92%,rgba(74,19,48,.10),transparent 26rem),linear-gradient(145deg,#fff9fc 0%,#f7feff 48%,#fffafd 100%);
     color:var(--vino);
     font-family:var(--font-ui);
     -webkit-font-smoothing:antialiased;
@@ -57,6 +57,7 @@
     flex-direction:column;
     gap:16px;
     min-height:100vh;
+    position:relative;
   }
 
   /* ============================== HEADER ============================== */
@@ -66,6 +67,11 @@
     justify-content:space-between;
     gap:20px;
     flex-wrap:wrap;
+    padding:clamp(16px,2.5vw,28px);
+    border:1px solid rgba(74,19,48,.10);
+    border-radius:24px;
+    background:linear-gradient(120deg,rgba(255,255,255,.95) 0%,rgba(255,241,247,.94) 56%,rgba(234,253,255,.95) 100%);
+    box-shadow:0 16px 36px rgba(74,19,48,.10);
   }
   .brand{display:flex; flex-direction:column; gap:6px; min-width:240px;}
   .brand-logo{
@@ -115,8 +121,8 @@
     display:inline-flex;
     align-items:center;
     gap:7px;
-    border:1.5px solid var(--line);
-    background:var(--card);
+    border:1.5px solid rgba(74,19,48,.14);
+    background:linear-gradient(135deg,#fff,#fff4f8);
     color:var(--vino);
     font-weight:700;
     font-size:12.5px;
@@ -128,7 +134,7 @@
     white-space:nowrap;
   }
   .ctrl-btn svg{width:16px;height:16px;flex:none;}
-  .ctrl-btn:hover{border-color:var(--cian-deep); transform:translateY(-1px);}
+  .ctrl-btn:hover{border-color:var(--coral); background:linear-gradient(135deg,#fff0f6,#ecfdff); transform:translateY(-2px); box-shadow:0 8px 16px rgba(74,19,48,.12);}
   .ctrl-btn:active{transform:translateY(0);}
   .ctrl-btn.is-active{
     background:var(--vino);
@@ -148,6 +154,58 @@
     background:linear-gradient(120deg,rgba(255,23,104,.07),rgba(45,210,233,.11));
     box-shadow:var(--shadow-soft);
   }
+
+  .quick-search{
+    position:relative;
+    flex:1 1 310px;
+    max-width:510px;
+    align-self:center;
+  }
+  .quick-search-label{
+    display:block;
+    margin:0 0 7px 3px;
+    color:var(--vino-soft);
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .quick-search-field{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding:5px 6px 5px 13px;
+    background:#fff;
+    border:1.5px solid rgba(74,19,48,.18);
+    border-radius:16px;
+    box-shadow:0 4px 14px rgba(74,19,48,.06);
+  }
+  .quick-search-field:focus-within{ border-color:var(--coral); box-shadow:0 0 0 4px rgba(255,23,104,.10); }
+  .quick-search-icon{ color:var(--coral); font-size:18px; line-height:1; }
+  .quick-search input{ width:100%; min-width:0; border:0; outline:0; color:var(--vino); background:transparent; font:600 14px var(--font-ui); }
+  .quick-search input::placeholder{ color:#9b8090; }
+  .quick-search button{ flex:none; border:0; border-radius:11px; padding:9px 12px; background:var(--coral); color:#fff; font:800 12px var(--font-ui); cursor:pointer; }
+  .quick-search button:hover{ background:var(--coral-deep); }
+  .search-results{
+    position:absolute;
+    top:calc(100% + 7px);
+    left:0; right:0;
+    display:none;
+    max-height:250px;
+    overflow:auto;
+    z-index:50;
+    padding:6px;
+    border:1px solid rgba(74,19,48,.13);
+    border-radius:14px;
+    background:#fff;
+    box-shadow:0 14px 30px rgba(74,19,48,.16);
+  }
+  .search-results.show{ display:block; }
+  .search-result{ display:flex; width:100%; align-items:center; gap:9px; padding:9px; border:0; border-radius:10px; background:transparent; color:var(--vino); text-align:left; cursor:pointer; font:600 12px var(--font-ui); }
+  .search-result:hover,.search-result:focus-visible{ background:#fff0f5; outline:0; }
+  .search-result-mark{ display:grid; place-items:center; width:24px; height:24px; flex:none; border-radius:8px; background:var(--cian); color:var(--vino); font-weight:900; }
+  .search-result small{ display:block; margin-top:1px; color:var(--vino-soft); font-size:10px; font-weight:700; }
+  .search-empty{ padding:10px; color:var(--vino-soft); font-size:12px; }
   .route-panel.show{ display:block; }
   .route-panel h2{ margin:0 0 4px; color:var(--vino); font-family:var(--font-display); font-size:18px; }
   .route-panel p{ margin:0 0 10px; color:var(--vino-soft); font-size:12.5px; }
@@ -189,6 +247,23 @@
   .contact-card a:hover{ text-decoration:underline; }
   .contacts-logo{ display:block; width:118px; height:auto; margin:12px 0 0 auto; }
   .contacts-note{ margin:12px 0 0; font-size:11px; line-height:1.4; color:var(--vino-soft); }
+  .glossary-panel{
+    display:none;
+    margin-top:2px;
+    padding:16px;
+    border:1.5px solid var(--line);
+    border-radius:var(--radius-md);
+    background:linear-gradient(125deg,#fff,#f4fcfe);
+    box-shadow:var(--shadow-soft);
+  }
+  .glossary-panel.show{ display:block; }
+  .glossary-panel h2{ margin:0 0 4px; color:var(--vino); font:700 18px var(--font-display); }
+  .glossary-panel > p{ margin:0 0 13px; color:var(--vino-soft); font-size:12.5px; }
+  .glossary-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:9px; }
+  .glossary-item{ display:flex; align-items:center; gap:10px; min-height:72px; padding:9px 11px; border:1px solid var(--line); border-radius:12px; background:#fff; }
+  .glossary-item img{ width:46px; height:46px; flex:none; object-fit:contain; }
+  .glossary-item h3{ margin:0 0 2px; color:var(--vino); font:800 13px var(--font-display); }
+  .glossary-item p{ margin:0; color:var(--vino-soft); font-size:11.5px; line-height:1.35; }
   .brand-footer{ display:flex; justify-content:flex-end; padding:4px 2px 0; }
   .brand-footer img{ width:116px; height:auto; object-fit:contain; }
 
@@ -197,6 +272,10 @@
     display:flex;
     flex-direction:column;
     gap:8px;
+    padding:14px 16px 6px;
+    border-radius:18px;
+    background:rgba(255,255,255,.68);
+    border:1px solid rgba(74,19,48,.08);
   }
   .filters-label{
     font-size:11.5px;
@@ -220,8 +299,8 @@
     align-items:center;
     gap:7px;
     flex:none;
-    border:1.5px solid var(--line);
-    background:var(--card);
+    border:1.5px solid rgba(74,19,48,.12);
+    background:linear-gradient(135deg,#fff,#f9fcff);
     color:var(--vino);
     font-weight:700;
     font-size:13px;
@@ -231,7 +310,7 @@
     transition:all .15s ease;
   }
   .chip svg{width:17px;height:17px;flex:none; color:var(--vino-soft); transition:color .15s ease;}
-  .chip:hover{border-color:var(--coral);}
+  .chip:hover{border-color:var(--coral); background:#fff0f6; transform:translateY(-1px);}
   .chip.is-on{
     background:var(--coral);
     border-color:var(--coral);
@@ -249,11 +328,11 @@
   }
   .map-frame{
     position:relative;
-    background:var(--card);
-    border:1.5px solid var(--line);
+    background:linear-gradient(145deg,#fff,#fff7fa);
+    border:1.5px solid rgba(74,19,48,.10);
     border-radius:var(--radius-lg);
     padding:clamp(8px,1.6vw,20px);
-    box-shadow:var(--shadow-soft);
+    box-shadow:0 7px 18px rgba(74,19,48,.07);
   }
   .map-scroller{
     position:relative;
@@ -686,6 +765,7 @@
     .page{ padding:16px 14px 24px; }
     .top{ flex-direction:column; }
     .brand{ min-width:0; }
+    .quick-search{ order:3; flex-basis:100%; max-width:none; }
     .brand-logo{
       display:block !important;
       width:150px;
@@ -710,6 +790,9 @@
   @media (max-width:430px){
     .map-frame{ padding:8px; }
     .brand-logo{ width:132px; }
+    .top{ padding:14px; border-radius:18px; }
+    .quick-search-field{ padding-left:10px; }
+    .quick-search button{ padding:8px 10px; }
     .pin{ width:16px; height:16px; border-width:1.25px; font-size:8px; }
     .activity-pin{ width:12px; height:12px; font-size:7px; }
     .exit-pin{ width:14px; height:14px; }
@@ -733,6 +816,16 @@
       <p>Encontrarás dónde jugar, hablar, descansar, conectarte o tomar algo entre clases.</p>
     </div>
 
+    <div class="quick-search" role="search">
+      <label class="quick-search-label" for="quickSearch">Encontrá un lugar</label>
+      <div class="quick-search-field">
+        <span class="quick-search-icon" aria-hidden="true">⌕</span>
+        <input id="quickSearch" type="search" autocomplete="off" placeholder="Ej. Biblioteca, piscina o Bloque 12" aria-controls="searchResults" aria-expanded="false">
+        <button id="quickSearchButton" type="button">Buscar</button>
+      </div>
+      <div class="search-results" id="searchResults" role="listbox" aria-label="Resultados de búsqueda"></div>
+    </div>
+
     <nav class="secondary-controls" aria-label="Controles del mapa">
       <button class="ctrl-btn" id="btn-estoy-aqui" type="button" aria-pressed="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="2.6"/><path d="M12 21c-4-4.2-7-7.9-7-11.2A7 7 0 0 1 19 9.8C19 13.1 16 16.8 12 21Z"/></svg>
@@ -753,6 +846,10 @@
       <button class="ctrl-btn" id="btn-contactos" type="button" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5 21c.8-4.1 3.1-6.2 7-6.2s6.2 2.1 7 6.2"/></svg>
         Contactos de interés
+      </button>
+      <button class="ctrl-btn" id="btn-glosario" type="button" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 10v5M12 7h.01"/></svg>
+        Glosario
       </button>
     </nav>
   </header>
@@ -780,6 +877,22 @@
     </div>
     <p class="contacts-note">Datos de contacto verificados en canales oficiales de UPB. Para atención urgente fuera del horario institucional, usa las líneas de emergencia de la ciudad.</p>
     <img class="contacts-logo" src="logo-upb-90.png" alt="UPB 90 años, 1936-2026">
+  </section>
+
+  <section class="glossary-panel" id="glossaryPanel" aria-label="Glosario de íconos del mapa">
+    <h2>Glosario de íconos</h2>
+    <p>Estos símbolos te ayudan a identificar rápidamente los servicios y espacios disponibles en el campus.</p>
+    <div class="glossary-grid">
+      <article class="glossary-item"><img src="icon-parqueadero.png" alt="Ícono de parqueadero"><div><h3>Parqueadero</h3><p>Zona destinada para estacionar vehículos.</p></div></article>
+      <article class="glossary-item"><img src="icon-ciclas.png" alt="Ícono de ciclas"><div><h3>Ciclas</h3><p>Espacio o servicio relacionado con bicicletas.</p></div></article>
+      <article class="glossary-item"><img src="icon-carros.png" alt="Ícono de carros"><div><h3>Carros</h3><p>Acceso o área de circulación para vehículos.</p></div></article>
+      <article class="glossary-item"><img src="icon-auditorio.png" alt="Ícono de auditorio"><div><h3>Auditorio</h3><p>Espacio para charlas, eventos y encuentros.</p></div></article>
+      <article class="glossary-item"><img src="icon-capilla.png" alt="Ícono de capilla"><div><h3>Capilla</h3><p>Espacio de reflexión y encuentro espiritual.</p></div></article>
+      <article class="glossary-item"><img src="icon-banos.png" alt="Ícono de baños"><div><h3>Baños</h3><p>Servicios sanitarios disponibles en el campus.</p></div></article>
+      <article class="glossary-item"><img src="icon-microondas.png" alt="Ícono de microondas"><div><h3>Microondas</h3><p>Punto para calentar tus alimentos.</p></div></article>
+      <article class="glossary-item"><img src="icon-cafeteria.png" alt="Ícono de cafetería"><div><h3>Cafetería</h3><p>Zona para comer, tomar algo y conversar.</p></div></article>
+      <article class="glossary-item"><img src="icon-agua.png" alt="Ícono de agua"><div><h3>Agua</h3><p>Punto de hidratación para recargar tu botella.</p></div></article>
+    </div>
   </section>
 
   <!-- ============================== FILTROS ============================== -->
@@ -891,7 +1004,7 @@ const SPACES = [
   { n:10, name:'Bloque 10',               x:20, y:73, tags:['d'] },
   { n:11, name:'Bloque 11',               x:13, y:56, tags:['d'] },
   { n:12, name:'Bloque 12',               x:51, y:12, tags:['e'] },
-  { n:13, name:'Tienda de Diseño',        x:32, y:49, tags:['b'] },
+  { n:13, name:'Tienda de Diseño',        x:33, y:50, tags:['b'] },
   { n:14, name:'Bienestar universitario', x:76, y:7,  tags:[] },
   { n:15, name:'Biblioteca',              x:50, y:32, tags:['d','e','c','a'] },
   { n:16, name:'Cancha sintética',        x:63, y:65, tags:['a'] },
@@ -999,6 +1112,46 @@ const discoverBubble = document.getElementById('discoverBubble');
 const hintToast = document.getElementById('hintToast');
 const calibReadout = document.getElementById('calibReadout');
 
+/* ---------------------------- búsqueda rápida ---------------------------- */
+const quickSearch = document.getElementById('quickSearch');
+const quickSearchButton = document.getElementById('quickSearchButton');
+const searchResults = document.getElementById('searchResults');
+const normalizeSearch = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const SEARCHABLE_PLACES = [
+  ...SPACES.map(item => ({...item, kind:'Bloque', mark:item.n})),
+  ...ACTIVITIES.map(item => ({...item, kind:'Actividad', mark:item.letter.toUpperCase()})),
+  ...EXITS.map(item => ({...item, kind:'Entrada o salida', mark:'↗'})),
+];
+function showSearchResults(query){
+  const term = normalizeSearch(query.trim());
+  if(!term){ searchResults.classList.remove('show'); quickSearch.setAttribute('aria-expanded','false'); return; }
+  const matches = SEARCHABLE_PLACES.filter(place => normalizeSearch(`${place.name} ${place.kind}`).includes(term)).slice(0,7);
+  searchResults.innerHTML = matches.length
+    ? matches.map((place,index) => `<button class="search-result" type="button" role="option" data-result="${index}"><span class="search-result-mark">${place.mark}</span><span>${place.name}<small>${place.kind}</small></span></button>`).join('')
+    : '<div class="search-empty">No encontramos ese lugar. Probá con “biblioteca”, “cancha”, “café” o el número de un bloque.</div>';
+  searchResults.classList.add('show');
+  quickSearch.setAttribute('aria-expanded','true');
+  searchResults.querySelectorAll('[data-result]').forEach(button => button.addEventListener('click', () => focusSearchPlace(matches[Number(button.dataset.result)])));
+}
+function focusSearchPlace(place){
+  const pin = [...pinsLayer.querySelectorAll('.pin, .activity-pin, .exit-pin')].find(element => element.getAttribute('aria-label') === place.name);
+  document.querySelectorAll('.pin.is-selected,.activity-pin.is-selected').forEach(element => element.classList.remove('is-selected'));
+  if(pin) pin.classList.add('is-selected');
+  const rect = scroller.getBoundingClientRect();
+  state.scale = Math.min(1.45, MAX_SCALE);
+  state.tx = rect.width / 2 - (place.x / 100 * rect.width * state.scale);
+  state.ty = rect.height / 2 - (place.y / 100 * rect.height * state.scale);
+  clampPan(); applyTransform();
+  showTooltip(place, pin || { style:{ left:place.x+'%', top:place.y+'%' } });
+  searchResults.classList.remove('show'); quickSearch.setAttribute('aria-expanded','false');
+  quickSearch.value = place.name;
+  flashToast(`Mapa centrado en: ${place.name}`);
+}
+quickSearch.addEventListener('input', () => showSearchResults(quickSearch.value));
+quickSearch.addEventListener('keydown', event => { if(event.key === 'Enter'){ event.preventDefault(); const first = searchResults.querySelector('[data-result]'); if(first) first.click(); else showSearchResults(quickSearch.value); } if(event.key === 'Escape'){ searchResults.classList.remove('show'); } });
+quickSearchButton.addEventListener('click', () => { const first = searchResults.querySelector('[data-result]'); if(first) first.click(); else showSearchResults(quickSearch.value); });
+document.addEventListener('click', event => { if(!event.target.closest('.quick-search')){ searchResults.classList.remove('show'); quickSearch.setAttribute('aria-expanded','false'); } });
+
 /* ---------------------------- ruta rápida ---------------------------- */
 const ROUTES = {
   5:  { title:'Pausa express', text:'Quedate cerca: buscá una sala de descanso, mesas del Bulevar o un punto de agua.' },
@@ -1013,6 +1166,8 @@ const routeTimes = document.getElementById('routeTimes');
 const btnRutaRapida = document.getElementById('btn-ruta-rapida');
 const btnContactos = document.getElementById('btn-contactos');
 const contactsPanel = document.getElementById('contactsPanel');
+const btnGlosario = document.getElementById('btn-glosario');
+const glossaryPanel = document.getElementById('glossaryPanel');
 const routeFrom = document.getElementById('routeFrom');
 const routeTo = document.getElementById('routeTo');
 const routeGo = document.getElementById('routeGo');
@@ -1042,6 +1197,13 @@ btnContactos.addEventListener('click', ()=>{
   btnContactos.classList.toggle('is-active', show);
   btnContactos.setAttribute('aria-expanded', String(show));
   if(show) contactsPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
+});
+btnGlosario.addEventListener('click', ()=>{
+  const show = !glossaryPanel.classList.contains('show');
+  glossaryPanel.classList.toggle('show', show);
+  btnGlosario.classList.toggle('is-active', show);
+  btnGlosario.setAttribute('aria-expanded', String(show));
+  if(show) glossaryPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
 });
 
 /* Recorridos aproximados por los ejes peatonales principales del plano. */
@@ -1222,7 +1384,9 @@ function makeActivityPin(act){
   pinsLayer.appendChild(el);
   return el;
 }
-ACTIVITIES.forEach(makeActivityPin);
+/* Los marcadores de letras a–e se mantienen como datos para filtros,
+   búsqueda y recomendaciones, pero no se dibujan sobre el plano para
+   conservar limpia la ilustración. */
 
 function makeExitPin(exit){
   const el = document.createElement('button');
@@ -1349,8 +1513,7 @@ btnDescubrir.addEventListener('click', ()=>{
   const pool=ACTIVITIES.filter(activity=>!activeTags.length || activity.tags.some(tag=>activeTags.includes(tag)));
   const pick=pool[Math.floor(Math.random()*pool.length)];
   const pinEl=[...pinsLayer.querySelectorAll('.activity-pin')].find(pin=>pin.getAttribute('aria-label')===pick.name);
-  if(!pinEl) return;
-  pinEl.classList.add('is-selected');
+  if(pinEl) pinEl.classList.add('is-selected');
   const category=pick.tags[0] || 'd';
   const facts=DISCOVERIES[category];
   const text=facts[Math.floor(Math.random()*facts.length)];
@@ -1367,7 +1530,7 @@ btnDescubrir.addEventListener('click', ()=>{
   discoverTimer = setTimeout(()=>{
     discoverBubble.classList.remove('show');
     discoverBubble.classList.remove('place-below');
-    pinEl.classList.remove('is-selected');
+    if(pinEl) pinEl.classList.remove('is-selected');
   }, 4200);
 });
 
